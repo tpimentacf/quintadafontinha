@@ -1,0 +1,21 @@
+.github/workflows/deploy.yml
+  s_37f08257d7c170::t_5faceb064d8015 17
+README.md
+  s_37f08257d7c170::t_fda9aac999e613 26,41-45,50,60-61,64-67,72,85,88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d35cc8c30c1c7b982af923c66bf69365acfe68ba",
+  "prompts": {},
+  "sessions": {
+    "s_37f08257d7c170": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e96ef54a5ffeUXzxd0IUArrEfv",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "tpimenta <tpimenta@cloudflare.com>"
+    }
+  }
+}
