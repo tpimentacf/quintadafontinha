@@ -114,6 +114,8 @@ jobs:
               | grep -iE 'verification failed|IDENTIFICATION HAS CHANGED|host key is known|Host key for|Server host key|known_hosts:[0-9]|matching host key|continue:|Offering|Server accepts|Permission denied|Authenticated|closed|refused|websocket|status code|bad handshake|error' \
               | sed 's/^debug1: //' | head -15 | paste -sd '|' -)
             echo "::error title=ssh-diagnostico::${summary:-sem linhas relevantes}"
+            echo "::error title=known_hosts (secret)::$(ssh-keygen -lf ~/.ssh/known_hosts 2>&1 | paste -sd '|' -)"
+            echo "::error title=ssh_debug tail::$(grep -viE 'proxy command|service-token|secret|Executing' ssh_debug.log | tail -4 | sed 's/^debug1: //' | paste -sd '|' -)"
             echo "::error::Falha SSH (exit $rc). 255 = ligação/autenticação; 2 = permissões em DEPLOY_PATH."
           fi
           rm -f ssh_debug.log
