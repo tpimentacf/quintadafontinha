@@ -21,50 +21,61 @@ python3 -m http.server 8080
 
 ## Deploy automático
 
-Cada `push` para `main` executa o workflow `.github/workflows/deploy.yml`, que sincroniza os ficheiros com o VPS via `rsync` sobre SSH.
+Cada `push` para `main` executa `.github/workflows/deploy.yml`, que publica os ficheiros no servidor com `rsync` sobre SSH.
+O servidor está numa rede privada (192.168.1.98), por isso o SSH é exposto através de um **Cloudflare Tunnel**
+(`ssh-dev.quintadafontinha.pt`) protegido por **Cloudflare Access** com um *service token*.
 
-### 1. Preparar o servidor (uma vez)
-
-```bash
-# no VPS (exemplo Ubuntu + Nginx)
-sudo apt install -y nginx rsync
-sudo adduser --disabled-password --gecos "" deploy
-sudo mkdir -p /var/www/quintadafontinha
-sudo chown -R deploy:www-data /var/www/quintadafontinha
+```
+GitHub Actions --cloudflared access ssh--> Cloudflare (Access) --Tunnel--> servidor:22
 ```
 
-Configuração Nginx (`/etc/nginx/sites-available/quintadafontinha`):
-
-```nginx
-server {
-    listen 80;
-    server_name quintadafontinha.pt www.quintadafontinha.pt;
-    root /var/www/quintadafontinha;
-    index index.html;
-    location / { try_files $uri $uri/ =404; }
-}
-```
-
-```bash
-sudo ln -s /etc/nginx/sites-available/quintadafontinha /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-```
-
-### 2. Chave SSH de deploy
+### 1. Chave SSH de deploy (local)
 
 ```bash
 ssh-keygen -t ed25519 -C "github-deploy" -f deploy_key -N ""
-# copiar deploy_key.pub para /home/deploy/.ssh/authorized_keys no VPS
 ```
 
-### 3. GitHub Secrets
+### 2. Cloudflare Tunnel (dashboard Zero Trust)
 
-Em **Settings → Secrets and variables → Actions** (ou no environment `production`):
+1. **Networks → Connectors → Create a tunnel → Cloudflared**, nome `fontinha-server`. Copiar o token.
+2. **Published application routes → Add**: hostname `ssh-dev.quintadafontinha.pt`, service `SSH` → `localhost:22`.
 
-| Secret            | Exemplo                          |
-|-------------------|----------------------------------|
-| `SSH_HOST`        | `203.0.113.10`                   |
-| `SSH_USER`        | `deploy`                         |
-| `SSH_PORT`        | `22` (opcional)                  |
-| `SSH_PRIVATE_KEY` | conteúdo do ficheiro `deploy_key`|
-| `DEPLOY_PATH`     | `/var/www/quintadafontinha`      |
+### 3. Cloudflare Access
+
+1. **Access controls → Service credentials → Service Tokens → Create**: `github-deploy`. Guardar Client ID e Secret.
+2. **Access controls → Applications → Add → Self-hosted**: domínio `ssh-dev.quintadafontinha.pt`.
+   Política: Action **Service Auth**, Include **Service Token = github-deploy**.
+   (Opcional: segunda política *Allow* com o seu email para acesso SSH pessoal.)
+
+### 4. Servidor (uma vez)
+
+```bash
+scp server/*.sh fontinha@192.168.1.98:~
+ssh fontinha@192.168.1.98
+sudo TUNNEL_TOKEN=<token> DEPLOY_PUBKEY="$(cat deploy_key.pub)" bash setup-ssh-tunnel.sh   # tunnel + utilizador deploy
+sudo CF_API_TOKEN=<token-dns> EMAIL=geral@quintadafontinha.pt bash setup-https.sh          # Nginx + HTTPS 443
+ssh-keyscan -t ed25519 localhost | sed 's/^localhost/ssh-dev.quintadafontinha.pt/'      # -> SSH_KNOWN_HOSTS
+```
+
+### 5. GitHub Secrets (environment `production`)
+
+| Secret                    | Valor                                      |
+|---------------------------|--------------------------------------------|
+| `SSH_HOST`                | `ssh-dev.quintadafontinha.pt`              |
+| `SSH_USER`                | `deploy`                                   |
+| `DEPLOY_PATH`             | `/var/www/quintadafontinha`                |
+| `SSH_PRIVATE_KEY`         | conteúdo de `deploy_key`                   |
+| `SSH_KNOWN_HOSTS`         | saída do `ssh-keyscan` acima               |
+| `CF_ACCESS_CLIENT_ID`     | Client ID do service token                 |
+| `CF_ACCESS_CLIENT_SECRET` | Client Secret do service token             |
+
+### Acesso SSH pessoal (opcional)
+
+```bash
+brew install cloudflared
+cat >> ~/.ssh/config <<EOF
+Host ssh-dev.quintadafontinha.pt
+  ProxyCommand cloudflared access ssh --hostname %h
+EOF
+ssh fontinha@ssh-dev.quintadafontinha.pt   # abre o browser para login Access
+```

@@ -13,27 +13,54 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}            # ex.: ssh-dev.quintadafontinha.pt
+      SSH_USER: ${{ secrets.SSH_USER }}            # ex.: deploy
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}      # ex.: /var/www/quintadafontinha
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure SSH
+      - name: Install cloudflared
+        run: |
+          curl -fsSL -o cloudflared.deb \
+            https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared.deb
+          cloudflared --version
+
+      - name: Configure SSH via Cloudflare Tunnel
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
-          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            STRICT=yes
+          else
+            echo "::warning::SSH_KNOWN_HOSTS não definido - a aceitar a host key no primeiro contacto"
+            STRICT=accept-new
+          fi
+
+          cat > ~/.ssh/config <<EOF
+          Host $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/id_deploy
+            IdentitiesOnly yes
+            StrictHostKeyChecking $STRICT
+            ProxyCommand cloudflared access ssh --hostname %h --service-token-id $CF_ACCESS_CLIENT_ID --service-token-secret $CF_ACCESS_CLIENT_SECRET
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Test connection
+        run: ssh "$SSH_HOST" 'echo "connected to $(hostname)"'
 
       - name: Sync files with rsync
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           rsync -avz --delete \
             --exclude '.git*' \
@@ -41,9 +68,8 @@ jobs:
             --exclude 'server' \
             --exclude 'README.md' \
             --exclude '.DS_Store' \
-            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
-            ./ "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/"
+            ./ "$SSH_HOST:$DEPLOY_PATH/"
 
       - name: Cleanup
         if: always()
-        run: rm -f ~/.ssh/id_deploy
+        run: rm -f ~/.ssh/id_deploy ~/.ssh/config
