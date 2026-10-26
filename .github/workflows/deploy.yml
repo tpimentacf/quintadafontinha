@@ -105,10 +105,18 @@ jobs:
 
       - name: Test connection
         run: |
-          ssh $SSH_VERBOSE "$SSH_HOST" 'echo "OK: $(whoami)@$(hostname)"; test -w "'"$DEPLOY_PATH"'" && echo "DEPLOY_PATH gravável" || { echo "DEPLOY_PATH sem permissão de escrita"; exit 2; }' \
-            || { rc=$?
-                 echo "::error::Falha SSH (exit $rc). 255 = ligação/autenticação (chave em authorized_keys do utilizador $SSH_USER, host key em SSH_KNOWN_HOSTS); 2 = permissões em $DEPLOY_PATH. Re-executar com 'debug' para log detalhado."
-                 exit $rc; }
+          set +e
+          ssh -v $SSH_VERBOSE "$SSH_HOST" 'echo "OK: $(whoami)@$(hostname)"; test -w "'"$DEPLOY_PATH"'" && echo "DEPLOY_PATH gravável" || { echo "DEPLOY_PATH sem permissão de escrita"; exit 2; }' 2> ssh_debug.log
+          rc=$?
+          if [ $rc -ne 0 ]; then
+            # Resumo do diagnóstico como annotations (sem linhas que possam conter credenciais)
+            grep -viE 'proxy command|service-token|secret|Executing' ssh_debug.log \
+              | grep -iE 'Authenticat|Offering|denied|Host key|REMOTE HOST|known_hosts|closed|kex_|websocket|refused|timed out|failed|error|Server accepts|Remote protocol|Connecting to|Permission|bad handshake|status code' \
+              | head -20 | while IFS= read -r l; do echo "::error title=ssh::$l"; done
+            echo "::error::Falha SSH (exit $rc). 255 = ligação/autenticação; 2 = permissões em DEPLOY_PATH."
+          fi
+          rm -f ssh_debug.log
+          exit $rc
 
       - name: Sync files with rsync
         run: |
