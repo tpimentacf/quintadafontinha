@@ -110,9 +110,10 @@ jobs:
           rc=$?
           if [ $rc -ne 0 ]; then
             # Resumo do diagnóstico como annotations (sem linhas que possam conter credenciais)
-            grep -viE 'proxy command|service-token|secret|Executing' ssh_debug.log \
-              | grep -iE 'Authenticat|Offering|denied|Host key|REMOTE HOST|known_hosts|closed|kex_|websocket|refused|timed out|failed|error|Server accepts|Remote protocol|Connecting to|Permission|bad handshake|status code' \
-              | head -20 | while IFS= read -r l; do echo "::error title=ssh::$l"; done
+            summary=$(grep -viE 'proxy command|service-token|secret|Executing|load_hostkeys|expecting|kex: |KEX_ECDH' ssh_debug.log \
+              | grep -iE 'verification failed|IDENTIFICATION HAS CHANGED|host key is known|Host key for|Server host key|known_hosts:[0-9]|matching host key|continue:|Offering|Server accepts|Permission denied|Authenticated|closed|refused|websocket|status code|bad handshake|error' \
+              | sed 's/^debug1: //' | head -15 | paste -sd '|' -)
+            echo "::error title=ssh-diagnostico::${summary:-sem linhas relevantes}"
             echo "::error::Falha SSH (exit $rc). 255 = ligação/autenticação; 2 = permissões em DEPLOY_PATH."
           fi
           rm -f ssh_debug.log
