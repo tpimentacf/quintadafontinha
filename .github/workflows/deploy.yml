@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      SSH_HOST: ${{ secrets.SSH_HOST }}            # ex.: ssh-dev.quintadafontinha.pt
+      SSH_HOST: ${{ secrets.SSH_HOST }}            # ex.: ssh.dev.quintadafontinha.pt
       SSH_USER: ${{ secrets.SSH_USER }}            # ex.: deploy
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}      # ex.: /var/www/quintadafontinha
     steps:
