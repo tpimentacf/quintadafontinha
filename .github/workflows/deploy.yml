@@ -38,6 +38,7 @@ jobs:
           rsync -avz --delete \
             --exclude '.git*' \
             --exclude '.github' \
+            --exclude 'server' \
             --exclude 'README.md' \
             --exclude '.DS_Store' \
             -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
