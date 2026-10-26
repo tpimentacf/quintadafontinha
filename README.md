@@ -69,7 +69,7 @@ ssh-keyscan -t ed25519 localhost | sed 's/^localhost/ssh.dev.quintadafontinha.pt
 
 | Secret                    | Valor                                      |
 |---------------------------|--------------------------------------------|
-| `SSH_HOST`                | `ssh.dev.quintadafontinha.pt`              |
+| `SSH_HOST`                | (fixo no workflow: `ssh.dev.quintadafontinha.pt`) |
 | `SSH_USER`                | `deploy`                                   |
 | `DEPLOY_PATH`             | `/var/www/quintadafontinha`                |
 | `SSH_PRIVATE_KEY`         | conteúdo de `deploy_key`                   |

@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      debug:
+        description: "SSH verbose (-vvv)"
+        type: boolean
+        default: false
 
 concurrency:
   group: deploy-production
@@ -14,12 +19,51 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      SSH_HOST: ${{ secrets.SSH_HOST }}            # ex.: ssh.dev.quintadafontinha.pt
-      SSH_USER: ${{ secrets.SSH_USER }}            # ex.: deploy
-      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}      # ex.: /var/www/quintadafontinha
+      # Endpoint SSH publicado no Cloudflare Tunnel e protegido por Cloudflare Access
+      SSH_HOST: ssh.dev.quintadafontinha.pt
+      SSH_USER: ${{ secrets.SSH_USER || 'deploy' }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH || '/var/www/quintadafontinha' }}
+      SSH_VERBOSE: ${{ inputs.debug && '-vvv' || '' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Validate secrets
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          missing=0
+          for v in SSH_PRIVATE_KEY CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET; do
+            if [ -z "${!v}" ]; then echo "::error::Secret $v em falta"; missing=1; fi
+          done
+          [ -z "$SSH_KNOWN_HOSTS" ] && echo "::warning::SSH_KNOWN_HOSTS em falta - host key aceite no primeiro contacto"
+          case "$CF_ACCESS_CLIENT_ID" in *.access) ;; *) echo "::warning::CF_ACCESS_CLIENT_ID normalmente termina em '.access'";; esac
+          if [ -n "$SSH_KNOWN_HOSTS" ] && ! grep -q "^$SSH_HOST " <<<"$SSH_KNOWN_HOSTS"; then
+            echo "::error::SSH_KNOWN_HOSTS deve começar por '$SSH_HOST ' (ex.: '$SSH_HOST ssh-ed25519 AAAA...')"
+            missing=1
+          fi
+          grep -q "BEGIN OPENSSH PRIVATE KEY" <<<"$SSH_PRIVATE_KEY" || { echo "::error::SSH_PRIVATE_KEY não parece uma chave OpenSSH"; missing=1; }
+          echo "Host: $SSH_HOST | User: $SSH_USER | Path: $DEPLOY_PATH"
+          exit $missing
+
+      - name: Check Cloudflare Access (service token)
+        env:
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+            -H "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+            -H "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+            "https://$SSH_HOST/")
+          echo "HTTP $code"
+          case "$code" in
+            302|401|403)
+              echo "::error::Access rejeitou o service token (HTTP $code). Verifique a política 'Service Auth' na aplicação $SSH_HOST e o Client ID/Secret."
+              exit 1 ;;
+          esac
 
       - name: Install cloudflared
         run: |
@@ -36,14 +80,15 @@ jobs:
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: |
           install -d -m 700 ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
+          ssh-keygen -y -f ~/.ssh/id_deploy > /dev/null || { echo "::error::SSH_PRIVATE_KEY inválida"; exit 1; }
+          echo "Fingerprint da chave de deploy: $(ssh-keygen -lf ~/.ssh/id_deploy)"
 
           if [ -n "$SSH_KNOWN_HOSTS" ]; then
-            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            printf '%s\n' "$SSH_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
             STRICT=yes
           else
-            echo "::warning::SSH_KNOWN_HOSTS não definido - a aceitar a host key no primeiro contacto"
             STRICT=accept-new
           fi
 
@@ -53,22 +98,32 @@ jobs:
             IdentityFile ~/.ssh/id_deploy
             IdentitiesOnly yes
             StrictHostKeyChecking $STRICT
+            ServerAliveInterval 30
             ProxyCommand cloudflared access ssh --hostname %h --service-token-id $CF_ACCESS_CLIENT_ID --service-token-secret $CF_ACCESS_CLIENT_SECRET
           EOF
           chmod 600 ~/.ssh/config
 
       - name: Test connection
-        run: ssh "$SSH_HOST" 'echo "connected to $(hostname)"'
+        run: |
+          ssh $SSH_VERBOSE "$SSH_HOST" 'echo "OK: $(whoami)@$(hostname)"; test -w "'"$DEPLOY_PATH"'" && echo "DEPLOY_PATH gravável" || { echo "DEPLOY_PATH sem permissão de escrita"; exit 2; }' \
+            || { rc=$?
+                 echo "::error::Falha SSH (exit $rc). 255 = ligação/autenticação (chave em authorized_keys do utilizador $SSH_USER, host key em SSH_KNOWN_HOSTS); 2 = permissões em $DEPLOY_PATH. Re-executar com 'debug' para log detalhado."
+                 exit $rc; }
 
       - name: Sync files with rsync
         run: |
-          rsync -avz --delete \
+          rsync -az --delete --itemize-changes \
             --exclude '.git*' \
             --exclude '.github' \
             --exclude 'server' \
             --exclude 'README.md' \
             --exclude '.DS_Store' \
+            -e "ssh $SSH_VERBOSE" \
             ./ "$SSH_HOST:$DEPLOY_PATH/"
+
+      - name: Verify site
+        continue-on-error: true
+        run: curl -sS -o /dev/null -w "https://dev.quintadafontinha.pt -> HTTP %{http_code}\n" --max-time 20 https://dev.quintadafontinha.pt/
 
       - name: Cleanup
         if: always()
