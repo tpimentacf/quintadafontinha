@@ -66,9 +66,17 @@ jobs:
 
       - name: Install cloudflared
         run: |
-          curl -fsSL -o cloudflared.deb \
-            https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-          sudo dpkg -i cloudflared.deb
+          if curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors -o cloudflared.deb \
+               https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb; then
+            sudo dpkg -i cloudflared.deb
+          else
+            echo "::warning::Download do GitHub falhou - a instalar via repositório APT da Cloudflare"
+            sudo mkdir -p --mode=0755 /usr/share/keyrings
+            curl -fsSL --retry 5 https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+            echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main" \
+              | sudo tee /etc/apt/sources.list.d/cloudflared.list
+            sudo apt-get update -qq && sudo apt-get install -y -qq cloudflared
+          fi
           cloudflared --version
 
       - name: Configure SSH via Cloudflare Tunnel
