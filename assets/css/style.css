@@ -130,6 +130,22 @@ address { font-style: normal; margin-bottom: 1rem; }
 .lb-next { right: .5rem; top: 50%; transform: translateY(-50%); }
 body.lb-open { overflow: hidden; }
 
+/* Faixa de cofinanciamento */
+.funding { background: #fff; border-top: 1px solid #eee; padding: 1.5rem 0; }
+.funding img { max-width: 900px; width: 100%; height: auto; margin: 0 auto; }
+.site-footer a { color: #ddd; }
+
+/* Página Norte 2020 */
+.page-head { background: var(--cream); padding: 3.5rem 0 2.5rem; text-align: center; }
+.project { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3rem; align-items: start; }
+.project-sheet img { width: 100%; height: auto; border: 1px solid #ddd; border-radius: var(--radius); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.project-sheet figcaption { font-size: .85rem; color: var(--muted); margin-top: .5rem; text-align: center; }
+.project-data { display: grid; grid-template-columns: max-content 1fr; gap: .55rem 1.2rem; margin: 0 0 1.8rem; }
+.project-data dt { font-weight: 700; color: var(--green-dark); }
+.project-data dd { margin: 0; }
+.project h3 { margin: 1.5rem 0 .6rem; }
+@media (max-width: 800px) { .project { grid-template-columns: 1fr; } .project-data { grid-template-columns: 1fr; gap: .1rem; } .project-data dd { margin-bottom: .6rem; } }
+
 .site-footer { background: #1f2719; color: #bbb; text-align: center; padding: 2rem 0; font-size: .9rem; }
 
 @media (max-width: 800px) {

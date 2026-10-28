@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Norte 2020 – Quinta da Fontinha - PAPN | Quinta da Fontinha</title>
+  <meta name="description" content="Projeto Quinta da Fontinha - PAPN (NORTE-06-38D7-FEDER-000103), cofinanciado pelo Norte 2020, Portugal 2020 e União Europeia através do FEDER.">
+  <link rel="icon" href="../assets/img/favicon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a href="../" class="brand"><img src="../assets/img/logo.jpg" alt="Quinta da Fontinha – página inicial" width="150" height="81"></a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav">
+        <a href="../#sobre">Sobre nós</a>
+        <a href="../#restaurante">Restaurante</a>
+        <a href="../#casa-mae">Casa Mãe</a>
+        <a href="../#bungalows">Bungalows</a>
+        <a href="../#eventos">Eventos</a>
+        <a href="../#contactos" class="btn btn-small">Contactar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Projeto cofinanciado</p>
+      <h1>Norte 2020</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container project">
+      <figure class="project-sheet">
+        <a href="../assets/img/norte2020/ficha-projeto.png" target="_blank" rel="noopener">
+          <img src="../assets/img/norte2020/ficha-projeto.png" width="586" height="722"
+               alt="Ficha do projeto Quinta da Fontinha - PAPN, com os logótipos Norte 2020, Portugal 2020 e União Europeia – FEDER">
+        </a>
+        <figcaption>Ficha do projeto (clique para ampliar)</figcaption>
+      </figure>
+
+      <div>
+        <h2>Quinta da Fontinha - PAPN</h2>
+        <dl class="project-data">
+          <dt>Código do projeto</dt><dd>NORTE-06-38D7-FEDER-000103</dd>
+          <dt>Objetivo principal</dt><dd>Promover a sustentabilidade e a qualidade do emprego e apoiar a mobilidade dos trabalhadores (FEDER)</dd>
+          <dt>Região de intervenção</dt><dd>Norte</dd>
+          <dt>Entidade beneficiária</dt><dd>Quinta da Fontinha Restauração, Lda.</dd>
+          <dt>Data de aprovação</dt><dd>02-02-2023</dd>
+          <dt>Data de início</dt><dd>01-07-2022</dd>
+          <dt>Data de conclusão</dt><dd>30-06-2023</dd>
+          <dt>Custo total elegível</dt><dd>229 386,95 €</dd>
+          <dt>Apoio financeiro da União Europeia</dt><dd>FEDER 126 162,82 €</dd>
+        </dl>
+
+        <h3>Objetivos, atividades e resultados esperados/atingidos</h3>
+        <p>Tendo em conta o crescimento do negócio, a Quinta da Fontinha necessita de adaptar o espaço existente, tornando-o mais funcional, no sentido de dar uma melhor resposta ao público alvo. Urge assim, investir na remodelação do espaço, equipamentos informáticos e estruturas de apoio à sustentabilidade energética da empresa.</p>
+        <p>Além de oferecer mais e melhores condições para os clientes, a Quinta da Fontinha pretende ainda com este projeto contribuir para a diminuição da pegada ecológica no planeta, adotando uma postura mais sustentável, sendo esta uma preocupação que a entidade mantém desde início e que procura combater com a aquisição e utilização de produtos locais, com a gestão de um quintal biológico para consumo do restaurante, com a transformação de resíduos orgânicos, e com a utilização de energias renováveis para autoconsumo apesar de estas ainda não serem suficientes.</p>
+        <p>É assim objetivo do promotor oferecer serviços de excelência e de qualidade, um serviço pensado de pessoas para pessoas capaz de gerar a fidelização de clientes. Pretende-se ainda melhorar a oferta de alojamento na região do Tâmega e Sousa, dinamizar a economia local, e promover a gastronomia e os produtos locais.</p>
+        <p><a href="../" class="btn">Voltar à página inicial</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="funding">
+    <div class="container">
+      <img src="../assets/img/norte2020/faixa-logos.png" alt="Norte 2020 · Portugal 2020 · União Europeia – Fundo Europeu de Desenvolvimento Regional" width="1407" height="189" loading="lazy">
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Quinta da Fontinha · Alojamento e Restauração · Celorico de Basto</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const t = document.querySelector(".nav-toggle"), n = document.querySelector(".nav");
+    t.addEventListener("click", () => t.setAttribute("aria-expanded", n.classList.toggle("open")));
+  </script>
+</body>
+</html>
