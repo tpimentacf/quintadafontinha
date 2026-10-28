@@ -130,6 +130,12 @@ address { font-style: normal; margin-bottom: 1rem; }
 .lb-next { right: .5rem; top: 50%; transform: translateY(-50%); }
 body.lb-open { overflow: hidden; }
 
+.map-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 0 0 1.2rem; }
+.btn-dark { color: var(--green-dark); }
+.btn-dark:hover { color: #fff; }
+.map-embed { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 10; margin-bottom: 1.2rem; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+
 /* Faixa de cofinanciamento */
 .funding { background: #fff; border-top: 1px solid #eee; padding: 1.5rem 0; }
 .funding img { max-width: 900px; width: 100%; height: auto; margin: 0 auto; }
