@@ -34,7 +34,7 @@
       <h1>Quinta da Fontinha</h1>
       <p class="lead">Alojamento rural, restaurante de cozinha tradicional portuguesa e quinta de eventos, num ambiente rústico e autêntico.</p>
       <div class="hero-actions">
-        <a href="#casa-mae" class="btn">Reservar estadia</a>
+        <a href="#alojamento" class="btn">Reservar estadia</a>
         <a href="#eventos" class="btn btn-outline">Organizar um evento</a>
       </div>
     </div>
@@ -61,32 +61,34 @@
   <!-- RESTAURANTE -->
   <section id="restaurante" class="section section-alt">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Restaurante</p>
-        <h2>Culinária tradicional do Minho</h2>
-        <p>Uma carta 100% regional, com pratos tradicionais minhotos confecionados com produtos de produtores locais e de forma sustentável, harmonizados com vinhos da região e com os melhores vinhos produzidos em todo o país.</p>
-      </div>
-
-      <div class="gallery gallery-4" data-gallery="restaurante">
-        <a href="assets/img/restaurante/grelha.jpg" data-caption="Grelhados na brasa"><img src="assets/img/restaurante/grelha-t.jpg" alt="Grelhados na brasa" loading="lazy"></a>
-        <a href="assets/img/restaurante/sala.jpg" data-caption="Sala do restaurante"><img src="assets/img/restaurante/sala-t.jpg" alt="Sala do restaurante em tijolo" loading="lazy"></a>
-        <a href="assets/img/restaurante/mesa.jpg" data-caption="Mesa posta"><img src="assets/img/restaurante/mesa-t.jpg" alt="Mesa posta com carta" loading="lazy"></a>
-        <a href="assets/img/restaurante/cozinha.jpg" data-caption="Na cozinha"><img src="assets/img/restaurante/cozinha-t.jpg" alt="Pimentos a saltear na cozinha" loading="lazy"></a>
-      </div>
-
-      <div class="cards">
-        <article class="card">
-          <h3>Gastronomia regional</h3>
-          <p>Pratos típicos da cozinha tradicional portuguesa, grelhados na brasa e receitas do Minho.</p>
-        </article>
-        <article class="card">
-          <h3>Vinhos de Portugal</h3>
-          <p>Harmonização com vinhos da região e seleção dos melhores vinhos nacionais.</p>
-        </article>
-        <article class="card">
-          <h3>Horário</h3>
-          <p>Almoço e jantar todos os dias, exceto à segunda-feira. Aberto a hóspedes e passantes.</p>
-        </article>
+      <div class="split">
+        <div class="slideshow" data-autoplay="6000" role="region" aria-roledescription="carrossel" aria-label="Fotos do restaurante">
+          <div class="ss-viewport">
+            <ul class="ss-track">
+              <li class="ss-slide" aria-roledescription="slide" aria-label="1 de 5"><a href="assets/img/restaurante/sala-principal.webp" data-caption="A nossa sala"><img src="assets/img/restaurante/sala-principal.webp" srcset="assets/img/restaurante/sala-principal-sm.webp 600w, assets/img/restaurante/sala-principal.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Sala com mesas postas sob o letreiro Quinta da Fontinha" loading="lazy"></a><span class="ss-caption">A nossa sala</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="2 de 5"><a href="assets/img/restaurante/grelha.webp" data-caption="Grelhados na brasa"><img src="assets/img/restaurante/grelha.webp" srcset="assets/img/restaurante/grelha-sm.webp 600w, assets/img/restaurante/grelha.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Carnes a grelhar na brasa" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Grelhados na brasa</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="3 de 5"><a href="assets/img/restaurante/sala.webp" data-caption="Sala do restaurante"><img src="assets/img/restaurante/sala.webp" srcset="assets/img/restaurante/sala-sm.webp 600w, assets/img/restaurante/sala.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Sala do restaurante em tijolo" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Sala do restaurante</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="4 de 5"><a href="assets/img/restaurante/mesa.webp" data-caption="Mesa posta"><img src="assets/img/restaurante/mesa.webp" srcset="assets/img/restaurante/mesa-sm.webp 600w, assets/img/restaurante/mesa.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Mesa posta com a carta" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Mesa posta</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="5 de 5"><a href="assets/img/restaurante/cozinha.webp" data-caption="Na cozinha"><img src="assets/img/restaurante/cozinha.webp" srcset="assets/img/restaurante/cozinha-sm.webp 600w, assets/img/restaurante/cozinha.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Pimentos a saltear na cozinha" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Na cozinha</span></li>
+            </ul>
+            <button class="ss-btn ss-prev" type="button" aria-label="Foto anterior">&#10094;</button>
+            <button class="ss-btn ss-next" type="button" aria-label="Foto seguinte">&#10095;</button>
+            <span class="ss-counter" aria-live="polite"></span>
+          </div>
+          <div class="ss-thumbs" role="tablist" aria-label="Escolher foto"></div>
+        </div>
+        <div class="split-text">
+          <p class="eyebrow">Restaurante</p>
+          <h2>Culinária tradicional do Minho</h2>
+          <p>Uma carta 100% regional, com pratos tradicionais minhotos confecionados com produtos de produtores locais e de forma sustentável, harmonizados com vinhos da região e com os melhores vinhos produzidos em todo o país.</p>
+          <ul class="room-list">
+            <li><strong>&#9670;</strong> Grelhados na brasa e receitas do Minho</li>
+            <li><strong>&#9670;</strong> Vinhos da região e seleção nacional</li>
+            <li><strong>&#9670;</strong> Almoço e jantar, exceto à segunda-feira</li>
+          </ul>
+          <p class="note">Aberto a hóspedes e passantes.</p>
+          <a href="#contactos" class="btn" data-subject="Reserva de restaurante">Reservar mesa</a>
+        </div>
       </div>
     </div>
   </section>
@@ -108,9 +110,22 @@
   <section id="casa-mae" class="section">
     <div class="container">
       <div class="split">
-        <a class="split-media" href="assets/img/casa-mae/vista-aerea.jpg" data-gallery="casa-mae" data-caption="Casa Mãe e piscina vistas do ar">
-          <img src="assets/img/casa-mae/vista-aerea.jpg" alt="Vista aérea da Casa Mãe com piscina" loading="lazy">
-        </a>
+        <div class="slideshow" data-autoplay="6000" role="region" aria-roledescription="carrossel" aria-label="Fotos da Casa Mãe">
+          <div class="ss-viewport">
+            <ul class="ss-track">
+              <li class="ss-slide" aria-roledescription="slide" aria-label="1 de 6"><a href="assets/img/casa-mae/vista-aerea.webp" data-caption="Casa Mãe e piscina vistas do ar"><img src="assets/img/casa-mae/vista-aerea.webp" srcset="assets/img/casa-mae/vista-aerea-sm.webp 600w, assets/img/casa-mae/vista-aerea.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Vista aérea da Casa Mãe com piscina" loading="lazy"></a><span class="ss-caption">Casa Mãe e piscina vistas do ar</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="2 de 6"><a href="assets/img/casa-mae/piscina.webp" data-caption="Piscina exterior com água aquecida"><img src="assets/img/casa-mae/piscina.webp" srcset="assets/img/casa-mae/piscina-sm.webp 600w, assets/img/casa-mae/piscina.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Piscina exterior com espreguiçadeiras" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Piscina exterior com água aquecida</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="3 de 6"><a href="assets/img/casa-mae/entrada.webp" data-caption="Entrada da Casa Mãe"><img src="assets/img/casa-mae/entrada.webp" srcset="assets/img/casa-mae/entrada-sm.webp 600w, assets/img/casa-mae/entrada.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Entrada da Casa Mãe entre pinheiros" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Entrada da Casa Mãe</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="4 de 6"><a href="assets/img/casa-mae/quarto-varanda.webp" data-caption="Quarto duplo com varanda"><img src="assets/img/casa-mae/quarto-varanda.webp" srcset="assets/img/casa-mae/quarto-varanda-sm.webp 600w, assets/img/casa-mae/quarto-varanda.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Quarto duplo com dossel e varanda" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Quarto duplo com varanda</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="5 de 6"><a href="assets/img/casa-mae/quarto-standard.webp" data-caption="Quarto standard"><img src="assets/img/casa-mae/quarto-standard.webp" srcset="assets/img/casa-mae/quarto-standard-sm.webp 600w, assets/img/casa-mae/quarto-standard.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Quarto standard com janela" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Quarto standard</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="6 de 6"><a href="assets/img/casa-mae/apartamento-escola.webp" data-caption="Casa da Escola – apartamento T2"><img src="assets/img/casa-mae/apartamento-escola.webp" srcset="assets/img/casa-mae/apartamento-escola-sm.webp 600w, assets/img/casa-mae/apartamento-escola.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Sala e cozinha de apartamento T2" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Casa da Escola – apartamento T2</span></li>
+            </ul>
+            <button class="ss-btn ss-prev" type="button" aria-label="Foto anterior">&#10094;</button>
+            <button class="ss-btn ss-next" type="button" aria-label="Foto seguinte">&#10095;</button>
+            <span class="ss-counter" aria-live="polite"></span>
+          </div>
+          <div class="ss-thumbs" role="tablist" aria-label="Escolher foto"></div>
+        </div>
         <div class="split-text">
           <p class="eyebrow">Alojamento · Casa Mãe</p>
           <h2>Casa Mãe</h2>
@@ -124,14 +139,6 @@
           <a href="#contactos" class="btn" data-subject="Reserva de alojamento">Pedir reserva</a>
         </div>
       </div>
-
-      <div class="gallery gallery-5" data-gallery="casa-mae">
-        <a href="assets/img/casa-mae/entrada.jpg" data-caption="Entrada da Casa Mãe"><img src="assets/img/casa-mae/entrada-t.jpg" alt="Entrada da Casa Mãe" loading="lazy"></a>
-        <a href="assets/img/casa-mae/piscina.jpg" data-caption="Piscina exterior com água aquecida"><img src="assets/img/casa-mae/piscina-t.jpg" alt="Piscina exterior" loading="lazy"></a>
-        <a href="assets/img/casa-mae/quarto-varanda.jpg" data-caption="Quarto duplo com varanda"><img src="assets/img/casa-mae/quarto-varanda-t.jpg" alt="Quarto duplo com varanda" loading="lazy"></a>
-        <a href="assets/img/casa-mae/quarto-standard.jpg" data-caption="Quarto standard"><img src="assets/img/casa-mae/quarto-standard-t.jpg" alt="Quarto standard" loading="lazy"></a>
-        <a href="assets/img/casa-mae/apartamento-escola.jpg" data-caption="Casa da Escola – apartamento T2"><img src="assets/img/casa-mae/apartamento-escola-t.jpg" alt="Sala e cozinha de apartamento T2 da Casa da Escola" loading="lazy"></a>
-      </div>
     </div>
   </section>
 
@@ -139,9 +146,28 @@
   <section id="bungalows" class="section section-alt">
     <div class="container">
       <div class="split split-reverse">
-        <a class="split-media" href="assets/img/bungalows/t2-alpendre.jpg" data-gallery="bungalows" data-caption="Bungalow T2 – alpendre em madeira">
-          <img src="assets/img/bungalows/t2-alpendre.jpg" alt="Alpendre de bungalow rústico em madeira" loading="lazy">
-        </a>
+        <div class="slideshow" data-autoplay="6000" role="region" aria-roledescription="carrossel" aria-label="Fotos dos bungalows">
+          <div class="ss-viewport">
+            <ul class="ss-track">
+              <li class="ss-slide" aria-roledescription="slide" aria-label="1 de 12"><a href="assets/img/bungalows/t2-alpendre.webp" data-caption="Bungalow T2 – alpendre em madeira"><img src="assets/img/bungalows/t2-alpendre.webp" srcset="assets/img/bungalows/t2-alpendre-sm.webp 600w, assets/img/bungalows/t2-alpendre.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Alpendre de bungalow em madeira" loading="lazy"></a><span class="ss-caption">Bungalow T2 – alpendre em madeira</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="2 de 12"><a href="assets/img/bungalows/t2-exterior.webp" data-caption="Bungalows T2 no jardim"><img src="assets/img/bungalows/t2-exterior.webp" srcset="assets/img/bungalows/t2-exterior-sm.webp 600w, assets/img/bungalows/t2-exterior.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Bungalows de madeira no jardim" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalows T2 no jardim</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="3 de 12"><a href="assets/img/bungalows/t2-interior.webp" data-caption="Bungalow T2 – sala e quartos"><img src="assets/img/bungalows/t2-interior.webp" srcset="assets/img/bungalows/t2-interior-sm.webp 600w, assets/img/bungalows/t2-interior.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Interior de bungalow T2" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalow T2 – sala e quartos</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="4 de 12"><a href="assets/img/bungalows/t2-quarto.webp" data-caption="Bungalow T2 – quarto com dossel"><img src="assets/img/bungalows/t2-quarto.webp" srcset="assets/img/bungalows/t2-quarto-sm.webp 600w, assets/img/bungalows/t2-quarto.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Quarto com dossel em madeira" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalow T2 – quarto com dossel</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="5 de 12"><a href="assets/img/bungalows/t2-sala.webp" data-caption="Bungalow T2 – sala de estar"><img src="assets/img/bungalows/t2-sala.webp" srcset="assets/img/bungalows/t2-sala-sm.webp 600w, assets/img/bungalows/t2-sala.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Sala de estar do bungalow" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalow T2 – sala de estar</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="6 de 12"><a href="assets/img/bungalows/t2-quarto-2.webp" data-caption="Bungalow T2 – quarto"><img src="assets/img/bungalows/t2-quarto-2.webp" srcset="assets/img/bungalows/t2-quarto-2-sm.webp 600w, assets/img/bungalows/t2-quarto-2.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Quarto de bungalow" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalow T2 – quarto</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="7 de 12"><a href="assets/img/bungalows/t2-varanda.webp" data-caption="Bungalow T2 – alpendre com mesa"><img src="assets/img/bungalows/t2-varanda.webp" srcset="assets/img/bungalows/t2-varanda-sm.webp 600w, assets/img/bungalows/t2-varanda.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Alpendre com mesa e cadeiras" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Bungalow T2 – alpendre com mesa</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="8 de 12"><a href="assets/img/bungalows/alpendre-exterior.webp" data-caption="“O Alpendre” – suite nupcial"><img src="assets/img/bungalows/alpendre-exterior.webp" srcset="assets/img/bungalows/alpendre-exterior-sm.webp 600w, assets/img/bungalows/alpendre-exterior.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Bungalow O Alpendre elevado" fetchpriority="low" loading="lazy"></a><span class="ss-caption">“O Alpendre” – suite nupcial</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="9 de 12"><a href="assets/img/bungalows/alpendre-quarto.webp" data-caption="“O Alpendre” – quarto com varanda"><img src="assets/img/bungalows/alpendre-quarto.webp" srcset="assets/img/bungalows/alpendre-quarto-sm.webp 600w, assets/img/bungalows/alpendre-quarto.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Quarto da suite com varanda" fetchpriority="low" loading="lazy"></a><span class="ss-caption">“O Alpendre” – quarto com varanda</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="10 de 12"><a href="assets/img/bungalows/alpendre-cama.webp" data-caption="“O Alpendre” – suite"><img src="assets/img/bungalows/alpendre-cama.webp" srcset="assets/img/bungalows/alpendre-cama-sm.webp 600w, assets/img/bungalows/alpendre-cama.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Cama da suite nupcial" fetchpriority="low" loading="lazy"></a><span class="ss-caption">“O Alpendre” – suite</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="11 de 12"><a href="assets/img/bungalows/alpendre-terraco.webp" data-caption="“O Alpendre” – varanda com vista"><img src="assets/img/bungalows/alpendre-terraco.webp" srcset="assets/img/bungalows/alpendre-terraco-sm.webp 600w, assets/img/bungalows/alpendre-terraco.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Varanda com cadeiras" fetchpriority="low" loading="lazy"></a><span class="ss-caption">“O Alpendre” – varanda com vista</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="12 de 12"><a href="assets/img/bungalows/alpendre-varanda.webp" data-caption="“O Alpendre” – um lugar para recordar"><img src="assets/img/bungalows/alpendre-varanda.webp" srcset="assets/img/bungalows/alpendre-varanda-sm.webp 600w, assets/img/bungalows/alpendre-varanda.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Noivos na varanda do Alpendre" fetchpriority="low" loading="lazy"></a><span class="ss-caption">“O Alpendre” – um lugar para recordar</span></li>
+            </ul>
+            <button class="ss-btn ss-prev" type="button" aria-label="Foto anterior">&#10094;</button>
+            <button class="ss-btn ss-next" type="button" aria-label="Foto seguinte">&#10095;</button>
+            <span class="ss-counter" aria-live="polite"></span>
+          </div>
+          <div class="ss-thumbs" role="tablist" aria-label="Escolher foto"></div>
+        </div>
         <div class="split-text">
           <p class="eyebrow">Alojamento · Bungalows</p>
           <h2>Bungalows</h2>
@@ -153,27 +179,6 @@
           <a href="#contactos" class="btn" data-subject="Reserva de alojamento">Pedir reserva</a>
         </div>
       </div>
-
-      <h3 class="gallery-title">Bungalows T2 rústicos</h3>
-      <div class="gallery gallery-wide-first" data-gallery="bungalows">
-        <a href="assets/img/bungalows/t2-exterior.jpg" data-caption="Bungalows T2 no jardim"><img src="assets/img/bungalows/t2-exterior-t.jpg" alt="Bungalows de madeira no jardim" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-interior.jpg" data-caption="Sala e quartos"><img src="assets/img/bungalows/t2-interior-t.jpg" alt="Interior de bungalow T2" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-quarto.jpg" data-caption="Quarto com dossel"><img src="assets/img/bungalows/t2-quarto-t.jpg" alt="Quarto com dossel em madeira" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-sala.jpg" data-caption="Sala de estar"><img src="assets/img/bungalows/t2-sala-t.jpg" alt="Sala de estar do bungalow" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-quarto-2.jpg" data-caption="Quarto"><img src="assets/img/bungalows/t2-quarto-2-t.jpg" alt="Quarto de bungalow" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-varanda.jpg" data-caption="Alpendre com mesa"><img src="assets/img/bungalows/t2-varanda-t.jpg" alt="Alpendre com mesa e cadeiras" loading="lazy"></a>
-        <a href="assets/img/bungalows/t2-detalhe.jpg" data-caption="Pormenores"><img src="assets/img/bungalows/t2-detalhe-t.jpg" alt="Toalhas sobre a cama" loading="lazy"></a>
-      </div>
-
-      <h3 class="gallery-title">Suite nupcial “O Alpendre”</h3>
-      <div class="gallery gallery-3" data-gallery="bungalows">
-        <a href="assets/img/bungalows/alpendre-exterior.jpg" data-caption="“O Alpendre” – suite nupcial"><img src="assets/img/bungalows/alpendre-exterior-t.jpg" alt="Bungalow O Alpendre elevado" loading="lazy"></a>
-        <a href="assets/img/bungalows/alpendre-quarto.jpg" data-caption="Quarto com varanda"><img src="assets/img/bungalows/alpendre-quarto-t.jpg" alt="Quarto da suite com varanda" loading="lazy"></a>
-        <a href="assets/img/bungalows/alpendre-cama.jpg" data-caption="Suite"><img src="assets/img/bungalows/alpendre-cama-t.jpg" alt="Cama da suite nupcial" loading="lazy"></a>
-        <a href="assets/img/bungalows/alpendre-terraco.jpg" data-caption="Varanda com vista"><img src="assets/img/bungalows/alpendre-terraco-t.jpg" alt="Varanda com cadeiras" loading="lazy"></a>
-        <a href="assets/img/bungalows/alpendre-varanda.jpg" data-caption="Um lugar para recordar"><img src="assets/img/bungalows/alpendre-varanda-t.jpg" alt="Noivos na varanda do Alpendre" loading="lazy"></a>
-        <a href="assets/img/bungalows/alpendre-entrada.jpg" data-caption="Entrada"><img src="assets/img/bungalows/alpendre-entrada-t.jpg" alt="Entrada do bungalow O Alpendre" loading="lazy"></a>
-      </div>
     </div>
   </section>
 
@@ -181,9 +186,29 @@
   <section id="eventos" class="section section-dark">
     <div class="container">
       <div class="split">
-        <a class="split-media" href="assets/img/eventos/jardim-coreto.jpg" data-gallery="eventos" data-caption="Jardim, lago e coreto">
-          <img src="assets/img/eventos/jardim-coreto.jpg" alt="Jardim com lago e coreto para cerimónias" loading="lazy">
-        </a>
+        <div class="slideshow" data-autoplay="6000" role="region" aria-roledescription="carrossel" aria-label="Fotos da quinta de eventos">
+          <div class="ss-viewport">
+            <ul class="ss-track">
+              <li class="ss-slide" aria-roledescription="slide" aria-label="1 de 13"><a href="assets/img/eventos/jardim-coreto.webp" data-caption="Jardim, lago e coreto"><img src="assets/img/eventos/jardim-coreto.webp" srcset="assets/img/eventos/jardim-coreto-sm.webp 600w, assets/img/eventos/jardim-coreto.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Jardim com lago e coreto" loading="lazy"></a><span class="ss-caption">Jardim, lago e coreto</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="2 de 13"><a href="assets/img/eventos/salao.webp" data-caption="Salão nobre"><img src="assets/img/eventos/salao.webp" srcset="assets/img/eventos/salao-sm.webp 600w, assets/img/eventos/salao.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Salão nobre preparado para banquete" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Salão nobre</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="3 de 13"><a href="assets/img/eventos/cerimonia.webp" data-caption="Cerimónia no coreto"><img src="assets/img/eventos/cerimonia.webp" srcset="assets/img/eventos/cerimonia-sm.webp 600w, assets/img/eventos/cerimonia.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Cerimónia no coreto" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Cerimónia no coreto</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="4 de 13"><a href="assets/img/eventos/mesa.webp" data-caption="Mesa de honra"><img src="assets/img/eventos/mesa.webp" srcset="assets/img/eventos/mesa-sm.webp 600w, assets/img/eventos/mesa.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Mesa de honra decorada" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Mesa de honra</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="5 de 13"><a href="assets/img/eventos/ponte.webp" data-caption="Ponte sobre o lago"><img src="assets/img/eventos/ponte.webp" srcset="assets/img/eventos/ponte-sm.webp 600w, assets/img/eventos/ponte.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Noivos na ponte sobre o lago" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Ponte sobre o lago</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="6 de 13"><a href="assets/img/eventos/centro-mesa.webp" data-caption="Decoração personalizada"><img src="assets/img/eventos/centro-mesa.webp" srcset="assets/img/eventos/centro-mesa-sm.webp 600w, assets/img/eventos/centro-mesa.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Centro de mesa com flores" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Decoração personalizada</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="7 de 13"><a href="assets/img/eventos/arco.webp" data-caption="Jardins"><img src="assets/img/eventos/arco.webp" srcset="assets/img/eventos/arco-sm.webp 600w, assets/img/eventos/arco.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Caminho do jardim com arco" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Jardins</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="8 de 13"><a href="assets/img/eventos/noite.webp" data-caption="Noite no jardim"><img src="assets/img/eventos/noite.webp" srcset="assets/img/eventos/noite-sm.webp 600w, assets/img/eventos/noite.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Noivos no jardim iluminado à noite" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Noite no jardim</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="9 de 13"><a href="assets/img/eventos/salao-2.webp" data-caption="Salão com luz natural"><img src="assets/img/eventos/salao-2.webp" srcset="assets/img/eventos/salao-2-sm.webp 600w, assets/img/eventos/salao-2.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Salão com mesas redondas" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Salão com luz natural</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="10 de 13"><a href="assets/img/eventos/decoracao.webp" data-caption="Pormenores de decoração"><img src="assets/img/eventos/decoracao.webp" srcset="assets/img/eventos/decoracao-sm.webp 600w, assets/img/eventos/decoracao.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Caixotes de madeira com fotografias" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Pormenores de decoração</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="11 de 13"><a href="assets/img/eventos/coreto-fumo.webp" data-caption="Momentos únicos"><img src="assets/img/eventos/coreto-fumo.webp" srcset="assets/img/eventos/coreto-fumo-sm.webp 600w, assets/img/eventos/coreto-fumo.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Coreto com efeito de fumo à noite" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Momentos únicos</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="12 de 13"><a href="assets/img/eventos/festa.webp" data-caption="Celebração no jardim"><img src="assets/img/eventos/festa.webp" srcset="assets/img/eventos/festa-sm.webp 600w, assets/img/eventos/festa.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Noivos com fumos coloridos" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Celebração no jardim</span></li>
+              <li class="ss-slide" aria-roledescription="slide" aria-label="13 de 13"><a href="assets/img/eventos/convidados.webp" data-caption="Festa no jardim"><img src="assets/img/eventos/convidados.webp" srcset="assets/img/eventos/convidados-sm.webp 600w, assets/img/eventos/convidados.webp 1500w" sizes="(max-width: 800px) 92vw, 560px" width="1500" height="1000" alt="Convidados a dançar no jardim" fetchpriority="low" loading="lazy"></a><span class="ss-caption">Festa no jardim</span></li>
+            </ul>
+            <button class="ss-btn ss-prev" type="button" aria-label="Foto anterior">&#10094;</button>
+            <button class="ss-btn ss-next" type="button" aria-label="Foto seguinte">&#10095;</button>
+            <span class="ss-counter" aria-live="polite"></span>
+          </div>
+          <div class="ss-thumbs" role="tablist" aria-label="Escolher foto"></div>
+        </div>
         <div class="split-text">
           <p class="eyebrow">Quinta de eventos</p>
           <h2>O seu dia, à sua medida</h2>
@@ -198,19 +223,6 @@
             <span>Vencedor Wedding Awards 2025</span>
           </a>
         </div>
-      </div>
-
-      <div class="gallery gallery-masonry" data-gallery="eventos">
-        <a href="assets/img/eventos/salao.jpg" data-caption="Salão nobre"><img src="assets/img/eventos/salao-t.jpg" alt="Salão nobre preparado para banquete" loading="lazy"></a>
-        <a href="assets/img/eventos/cerimonia.jpg" data-caption="Cerimónia no coreto"><img src="assets/img/eventos/cerimonia-t.jpg" alt="Cerimónia no coreto" loading="lazy"></a>
-        <a href="assets/img/eventos/mesa.jpg" data-caption="Mesa de honra"><img src="assets/img/eventos/mesa-t.jpg" alt="Mesa de honra decorada" loading="lazy"></a>
-        <a href="assets/img/eventos/ponte.jpg" data-caption="Ponte sobre o lago"><img src="assets/img/eventos/ponte-t.jpg" alt="Noivos na ponte sobre o lago" loading="lazy"></a>
-        <a href="assets/img/eventos/centro-mesa.jpg" data-caption="Decoração personalizada"><img src="assets/img/eventos/centro-mesa-t.jpg" alt="Centro de mesa com flores" loading="lazy"></a>
-        <a href="assets/img/eventos/arco.jpg" data-caption="Jardins"><img src="assets/img/eventos/arco-t.jpg" alt="Caminho do jardim com arco" loading="lazy"></a>
-        <a href="assets/img/eventos/noite.jpg" data-caption="Noite no jardim"><img src="assets/img/eventos/noite-t.jpg" alt="Noivos no jardim iluminado à noite" loading="lazy"></a>
-        <a href="assets/img/eventos/salao-2.jpg" data-caption="Salão com luz natural"><img src="assets/img/eventos/salao-2-t.jpg" alt="Salão com mesas redondas" loading="lazy"></a>
-        <a href="assets/img/eventos/coreto-fumo.jpg" data-caption="Momentos únicos"><img src="assets/img/eventos/coreto-fumo-t.jpg" alt="Coreto com efeito de fumo à noite" loading="lazy"></a>
-        <a href="assets/img/eventos/convidados.jpg" data-caption="Festa no jardim"><img src="assets/img/eventos/convidados-t.jpg" alt="Convidados a dançar no jardim" loading="lazy"></a>
       </div>
     </div>
   </section>
